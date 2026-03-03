@@ -15,13 +15,14 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/auth/**" , "/public/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/doctor/**").hasAnyRole("ADMIN","DOCTOR")
-                                .anyRequest().authenticated()
-                )
-                .formLogin(Customizer.withDefaults());;
+                                .requestMatchers( "/auth/**","/public/**").permitAll()
+//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("/doctor/**").hasAnyRole("ADMIN","DOCTOR")
+//                                .anyRequest().authenticated()
+                );
+//                .formLogin(Customizer.withDefaults());;
 
         return httpSecurity.build();
     }

@@ -2,6 +2,7 @@ package com.codingshuttle.youtube.hospitalManagement.entity;
 
 import com.codingshuttle.youtube.hospitalManagement.entity.type.RoleType;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,12 +12,14 @@ import java.util.*;
 @Entity
 @Table(name = "app_user")
 @Data
+@Builder
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @JoinColumn(unique = true)
     private String username;
     private String password;
 
